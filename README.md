@@ -10,18 +10,18 @@ Standalone compiler-oriented Java project analyzer. It accepts Java source trees
 ```bash
 mvn clean package
 ```
-This creates `target/java-ir-generator-1.0.0-jar-with-dependencies.jar`.
+This creates `target/java-ir-generator-jar-with-dependencies.jar`.
 
 ## Run
 ```bash
 # Analyze source tree
-java -jar target/java-ir-generator-1.0.0-jar-with-dependencies.jar --input ./sample-project --mode source --output ./output/project_ir.json
+java -jar target/java-ir-generator-jar-with-dependencies.jar --input ./sample-project --mode source --output ./output/project_ir.json
 
 # Analyze compiled classes or a directory of class files
-java -jar target/java-ir-generator-1.0.0-jar-with-dependencies.jar --input ./target/classes --mode bytecode --output ./output/project_ir.json
+java -jar target/java-ir-generator-jar-with-dependencies.jar --input ./target/classes --mode bytecode --output ./output/project_ir.json
 
 # Analyze a JAR
-java -jar target/java-ir-generator-1.0.0-jar-with-dependencies.jar --input ./app.jar --mode bytecode --output ./output/project_ir.json
+java -jar target/java-ir-generator-jar-with-dependencies.jar --input ./app.jar --mode bytecode --output ./output/project_ir.json
 ```
 
 ## IR contents
