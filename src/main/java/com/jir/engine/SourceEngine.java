@@ -5,6 +5,7 @@ import com.github.javaparser.*;
 import com.github.javaparser.ast.*;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.*;
+import com.github.javaparser.ast.nodeTypes.NodeWithModifiers;
 import com.github.javaparser.ast.stmt.*;
 import java.nio.file.*;
 import java.util.*;
@@ -68,8 +69,7 @@ public final class SourceEngine {
  private static String stmtKind(Statement s){if(s instanceof IfStmt)return "BRANCH";if(s instanceof WhileStmt||s instanceof ForStmt||s instanceof ForEachStmt||s instanceof DoStmt)return "LOOP";if(s instanceof ReturnStmt)return "RETURN";if(s instanceof ThrowStmt)return "THROW";if(s instanceof TryStmt)return "TRY";if(s instanceof SwitchStmt)return "SWITCH";return "STATEMENT";}
  private static void edge(ArrayNode a,int f,int t,String k){ObjectNode e=a.addObject();e.put("from",f);e.put("to",t);e.put("kind",k);}
  private static String kind(TypeDeclaration<?> t){if(t instanceof EnumDeclaration)return "ENUM";if(t instanceof RecordDeclaration)return "RECORD";if(t instanceof AnnotationDeclaration)return "ANNOTATION";if(t instanceof ClassOrInterfaceDeclaration x)return x.isInterface()?"INTERFACE":"CLASS";return "UNKNOWN";}
- private static String visibility(BodyDeclaration<?> d){String s=d.getModifiers().toString();if(s.contains("public"))return "PUBLIC";if(s.contains("protected"))return "PROTECTED";if(s.contains("private"))return "PRIVATE";return "PACKAGE_PRIVATE";}
- private static String visibility(CallableDeclaration<?> d){String s=d.getModifiers().toString();if(s.contains("public"))return "PUBLIC";if(s.contains("protected"))return "PROTECTED";if(s.contains("private"))return "PRIVATE";return "PACKAGE_PRIVATE";}
+ private static String visibility(NodeWithModifiers<?> d){String s=d.getModifiers().toString();if(s.contains("public"))return "PUBLIC";if(s.contains("protected"))return "PROTECTED";if(s.contains("private"))return "PRIVATE";return "PACKAGE_PRIVATE";}
  private static void strings(ArrayNode a,List<String> xs){xs.forEach(a::add);}
  private static void diagnostic(ArrayNode a,String code,String file,String message){ObjectNode n=a.addObject();n.put("code",code);n.put("file",file);n.put("message",String.valueOf(message));}
 }
